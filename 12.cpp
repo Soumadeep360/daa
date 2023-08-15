@@ -5,7 +5,7 @@ using namespace std;
 
 int graph[MAX_CITIES][MAX_CITIES];
 bool visited[MAX_CITIES];
-int minCost = 99999999;
+int minCost = INT_MAX;
 vector<int> bestPath;
 
 void initializeGraph(int n) {
