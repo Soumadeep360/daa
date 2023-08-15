@@ -11,7 +11,7 @@ void shortestPath(int V, vector<pair<int,int>>adj[])
 
     dist[0] = 0;
 
-    pq.push({0, 0});
+    pq.push({0, 0}); //{dis,node}
     while (!pq.empty())
     {
 
