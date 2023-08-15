@@ -1,25 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void shortestPath(int n, int m, vector<vector<int>> &edges)
+void shortestPath(int V, vector<pair<int,int>>adj[])
 {
-
-    vector<pair<int, int>> adj[n + 1];
-    for (auto it : edges)
-    {
-        adj[it[0]].push_back({it[1], it[2]});
-        adj[it[1]].push_back({it[0], it[2]});
-    }
-
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
-    vector<int> dist(n + 1, 1e9), parent(n + 1);
-    for (int i = 1; i <= n; i++)
+    vector<int> dist(V, 1e9), parent(V);
+    for (int i = 0; i < V; i++)
         parent[i] = i;
 
-    dist[1] = 0;
+    dist[0] = 0;
 
-    pq.push({0, 1});
+    pq.push({0, 0});
     while (!pq.empty())
     {
 
@@ -45,7 +37,7 @@ void shortestPath(int n, int m, vector<vector<int>> &edges)
 
     vector<int> path;
 
-    for (int i = 1; i <= n; i++)
+    for (int i = 0; i < V; i++)
     {
 
         int node = i;
@@ -55,7 +47,7 @@ void shortestPath(int n, int m, vector<vector<int>> &edges)
             path.push_back(node);
             node = parent[node];
         }
-        path.push_back(1);
+        path.push_back(0);
 
         reverse(path.begin(), path.end());
         cout << "Node " << i << " distance is: " << dist[i] << endl;
@@ -72,10 +64,21 @@ void shortestPath(int n, int m, vector<vector<int>> &edges)
 int main()
 {
 
-    int V = 5, E = 6;
-    vector<vector<int>> edges = {{1, 2, 2}, {2, 5, 5}, {2, 3, 4}, {1, 4, 1}, {4, 3, 3}, {3, 5, 1}};
+     int V, E, start;
+  cout << "Enter the number of vertices and edges of the graph:\n";
+  cin >> V >> E;
+  vector<pair<int,int>> adj[V];
 
-    shortestPath(V, E, edges);
+  cout << "Enter the adjacency list with edge weights:\n";
+  for (int i = 0; i < E; i++)
+  {
+    int u, v, w;
+    cin >> u >> v >> w;
+    adj[u].push_back({v, w});
+    adj[v].push_back({u, w});
+  }
+
+    shortestPath(V, adj);
 
     return 0;
 }
