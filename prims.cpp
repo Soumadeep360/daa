@@ -9,7 +9,7 @@ int MST(int V, vector<vector<int>> adj[], int start)
   vector<int> vis(V, 0);
   vector<pair<int, int>> edges;
 
-  pq.push({0, -1, start});
+  pq.push({0, -1, start}); //{wt,parent,node}
   int sum = 0;
   while (!pq.empty())
   {
