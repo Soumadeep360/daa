@@ -2,12 +2,12 @@
 using namespace std;
 
 // Function to find sum of weights of edges of the Minimum Spanning Tree.
-int MST(int V, vector<vector<int>> adj[], int start)
+void MST(int V, vector<vector<int>> adj[], int start)
 {
   priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
 
   vector<int> vis(V, 0);
-  vector<pair<int, int>> edges;
+  vector<pair<int, int>> mst;
 
   pq.push({0, -1, start}); //{wt,parent,node}
   int sum = 0;
@@ -25,8 +25,7 @@ int MST(int V, vector<vector<int>> adj[], int start)
 
     vis[node] = 1;
     sum += wt;
-
-    edges.push_back({parent, node});
+    mst.push_back({parent, node});
 
     for (auto x : adj[node])
     {
@@ -36,7 +35,7 @@ int MST(int V, vector<vector<int>> adj[], int start)
       }
     }
   }
-  for (auto x : edges)
+  for (auto x : mst)
   {
     if (x.first == -1)
     {
@@ -44,7 +43,7 @@ int MST(int V, vector<vector<int>> adj[], int start)
     }
     cout << x.first << '-' << x.second << endl;
   }
-  return sum;
+  cout<< sum<<endl;
 }
 
 int main()
@@ -65,7 +64,7 @@ int main()
   cout << "Enter the start node: ";
   cin >> start;
 
-  cout << MST(V, adj, start) << "\n";
+   MST(V, adj, start);
 
   return 0;
 }
